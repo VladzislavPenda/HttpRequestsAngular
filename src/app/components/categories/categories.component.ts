@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { Observable } from 'rxjs';
 import { Catalog } from 'src/app/common/catalog';
 import { DictCountryList } from 'src/app/common/countryList';
+import { OwnedCatalog } from 'src/app/common/ownedCatalog';
 import { CategoryHttpServiceService as CatalogHttpServiceService } from 'src/app/services/httpServices/categoryHttpService/category-http-service.service';
 
 @Component({
@@ -12,36 +13,34 @@ import { CategoryHttpServiceService as CatalogHttpServiceService } from 'src/app
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesComponent implements OnInit {
-  public data: Observable<Catalog[]> | undefined;
-  public catalogData: Catalog | undefined;
+  public catalogData: Observable<Catalog[]> | undefined;
+  public catal: Catalog[] | undefined;
+  public ownedCatalogData: Observable<OwnedCatalog[]> | undefined;
+  public show = false;
 
-  constructor(private catalogService: CatalogHttpServiceService, private cd: ChangeDetectorRef) {
+  constructor(private catalogService: CatalogHttpServiceService) {
    }
 
   ngOnInit(): void {
-    // this.loadCategories();
-    this.loadCategoriesAsObservable();
+    this.loadCatalog();
+    console.log("in");
+    this.catalogData?.subscribe((data: any) => this.catal = data)
+
+    console.log(this.catal);
+    this.loadOwnedCatalog();
   }
 
-  func() {
-    console.log(this.data);
+  private loadCatalog() {
+    this.catalogData = this.catalogService.getCategories();
+    console.log(this.catalogData);
   }
 
-  private loadCategories() {
-    this.catalogService.getCategories().subscribe((data: any) => {
-      this.catalogData = data;
-      // console.log(this.catalogData);
-    })
-    this.cd.reattach();
+  private loadOwnedCatalog() {
+    this.ownedCatalogData = this.catalogService.getOwnedCategories();
   }
 
-  private loadCategoriesAsObservable() {
-    this.data = this.catalogService.getCategories();
-    console.log(this.data);
-  }
-
-  public getChilds(item: Catalog): Catalog[] {
-    let parentsArray: Catalog[] = [item];
+  public getParents(item: OwnedCatalog): OwnedCatalog[] {
+    let parentsArray: OwnedCatalog[] = [item];
     let isLast = false;
     while(!isLast) {
       if (item.parent != undefined) {
@@ -52,9 +51,7 @@ export class CategoriesComponent implements OnInit {
       }
     }
 
-    console.log(parentsArray);
     parentsArray = parentsArray.reverse();
     return parentsArray;
   }
-
 }

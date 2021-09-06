@@ -1,8 +1,42 @@
-.category-container {
+.two-list-container {
+  display: flex;
+}
+
+.root-item{
+  font-size: 20px;
+  color: rgb(153, 16, 12)
+}
+
+.owned-category-container {
   width: 30%;
-  background-color: darkgray;
+  background-color: rgb(218, 203, 203);
 }
-.catalog-item:first-child{
-  background-color: darkcyan;
+
+.second-layer {
+  font-size: 18px;
+  color:rgb(22, 117, 59);
+  padding-left: 10px;
 }
+
+.layer1 {
+  padding-left: 10px;
+}
+
+.third-layer, .layer2 {
+  padding-left: 20px;
+}
+
+.category-group:first-child {
+}
+
+.catalog-container{
+  background-color: rgb(197, 186, 186);
+}
+
+.text {
+  font-size: 23px;
+  color:rgb(153, 16, 12);
+}
+
+
 

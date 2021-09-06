@@ -1,17 +1,32 @@
 <p>categories works!</p>
-<!-- <div *ngIf="data != undefined">
-  {{func()}}
-  <div *ngFor="let item of data | async">
-    {{item.name}}
-  </div>
-</div> -->
-<div class="category-container">
-  <div *ngFor="let item of (data | async)">
-    <div class="catalog-item" *ngFor="let item of getChilds(item); index as i">
-      <span>{{i + 1}} уровень {{item.name}}</span>
+<ng-container *ngIf="catalogData != undefined && ownedCatalogData != undefined">
+  <div class="two-list-container">
+    <div class="catalog-container">
+      <!-- <span *ngIf="catal != undefined" class="text">Catalog</span> -->
+      <ul class="category-group" *ngFor="let item of (catalogData | async)">
+        <span class="root-item"> {{item.name}}</span>
+        <div class="category-item" *ngFor="let item of item.children; index as i">
+          <span class="second-layer">{{item.name}}</span>
+          <div *ngFor="let item of item.children; index as i">
+            <span class="third-layer">{{i + 1}} {{item.name}}</span>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="owned-catalog-container">
+      <span class="text">Owned-catalog</span>
+      <ul class="category-group" *ngFor="let item of (ownedCatalogData | async)">
+        <li class="category-item" *ngFor="let item of getParents(item); index as i">
+          <span class=layer{{i}}>{{i + 1}}. уровень {{item.name}}</span>
+        </li>
+        <ng-container *ngIf="show">
+        </ng-container>
+      </ul>
     </div>
   </div>
-</div>
+</ng-container>
+
+
 
 
 
