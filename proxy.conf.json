@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://test0.vls.dcby.xyz",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

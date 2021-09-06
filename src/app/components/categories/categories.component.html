@@ -1,0 +1,18 @@
+<p>categories works!</p>
+<!-- <div *ngIf="data != undefined">
+  {{func()}}
+  <div *ngFor="let item of data | async">
+    {{item.name}}
+  </div>
+</div> -->
+<div class="category-container">
+  <div *ngFor="let item of (data | async)">
+    <div class="catalog-item" *ngFor="let item of getChilds(item); index as i">
+      <span>{{i + 1}} уровень {{item.name}}</span>
+    </div>
+  </div>
+</div>
+
+
+
+
