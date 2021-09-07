@@ -9,8 +9,7 @@ import { TestHttpService } from 'src/app/services/httpServices/testHttpService/t
   providers: [TestHttpService]
 })
 export class TestComponent implements OnInit {
-  config: Config | undefined;
-  // config2: Config | undefined;
+  public config: Config | undefined;
   public headers: string[] | undefined;
 
   constructor(private testHttpService: TestHttpService) { }
@@ -19,17 +18,7 @@ export class TestComponent implements OnInit {
     this.showConfigResponse();
   }
 
-
-  showConfig() {
-    this.testHttpService.getConfig()
-      .subscribe((data: Config) => this.config = {
-          heroesUrl: data.heroesUrl,
-          textfile:  data.textfile,
-          date: data.date,
-      });
-  }
-
-  showConfigResponse() {
+  private showConfigResponse() {
     this.testHttpService.getConfigResponse()
       .subscribe(resp => {
         const keys = resp.headers.keys()
@@ -37,7 +26,4 @@ export class TestComponent implements OnInit {
         this.config = resp.body!;
       })
   }
-
-
-
 }

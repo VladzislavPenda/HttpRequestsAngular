@@ -8,15 +8,11 @@ import { CategoryHttpServiceService } from 'src/app/services/httpServices/catego
   styleUrls: ['./countries.component.scss'],
   providers: [CategoryHttpServiceService]
 })
-export class CountriesComponent implements OnInit {
+export class CountriesComponent {
   public countries?: DictCountryList[];
-
 
   constructor(private httpService: CategoryHttpServiceService) {
     this.loadCountries();
-  }
-
-  ngOnInit(): void {
   }
 
   private loadCountries() {

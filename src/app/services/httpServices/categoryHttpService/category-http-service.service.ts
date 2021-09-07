@@ -15,16 +15,15 @@ export class CategoryHttpServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getCountries(): any{
+  public getCountries(): any{
     return this.http.get(this.dictCountryUrl);
   }
 
-  getCategories(): Observable<Catalog[]>{
-    // this.subject?.next(this.http.get<Catalog>(this.categoryUrlString).subscribe((data: any) => {}))
+  public getCategories(): Observable<Catalog[]>{
     return this.http.get<Catalog[]>(this.apiCatalogUrl);
   }
 
-  getOwnedCategories(): Observable<OwnedCatalog[]> {
+  public getOwnedCategories(): Observable<OwnedCatalog[]> {
     return this.http.get<OwnedCatalog[]>(this.categoryUrlStringForManyNodes)
   }
 }
