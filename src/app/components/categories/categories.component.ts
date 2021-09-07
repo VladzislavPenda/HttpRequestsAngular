@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Catalog } from 'src/app/common/catalog';
-import { DictCountryList } from 'src/app/common/countryList';
 import { OwnedCatalog } from 'src/app/common/ownedCatalog';
 import { CategoryHttpServiceService as CatalogHttpServiceService } from 'src/app/services/httpServices/categoryHttpService/category-http-service.service';
 
@@ -14,25 +13,18 @@ import { CategoryHttpServiceService as CatalogHttpServiceService } from 'src/app
 })
 export class CategoriesComponent implements OnInit {
   public catalogData: Observable<Catalog[]> | undefined;
-  public catal: Catalog[] | undefined;
   public ownedCatalogData: Observable<OwnedCatalog[]> | undefined;
   public show = false;
 
-  constructor(private catalogService: CatalogHttpServiceService) {
-   }
+  constructor(private catalogService: CatalogHttpServiceService) {}
 
   ngOnInit(): void {
     this.loadCatalog();
-    console.log("in");
-    this.catalogData?.subscribe((data: any) => this.catal = data)
-
-    console.log(this.catal);
     this.loadOwnedCatalog();
   }
 
   private loadCatalog() {
     this.catalogData = this.catalogService.getCategories();
-    console.log(this.catalogData);
   }
 
   private loadOwnedCatalog() {

@@ -2,14 +2,12 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { Config } from 'src/app/common/config';
-import {catchError, map} from 'rxjs/operators';
+import {catchError } from 'rxjs/operators';
 
 
 @Injectable()
 export class TestHttpService {
-  configUrl = 'assets/config.json';
-  private error: HttpErrorResponse | undefined;
-
+  private configUrl = 'assets/config.json';
 
   constructor(private http: HttpClient) { }
 
